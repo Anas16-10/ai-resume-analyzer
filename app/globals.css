@@ -120,10 +120,77 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    background-image: radial-gradient(ellipse at top right, var(--tw-gradient-stops));
+    @apply from-white via-slate-50 to-blue-50 text-slate-900 min-h-screen font-sans;
+    overflow-y: auto;
   }
+
   html {
-    @apply font-sans;
+    height: auto;
+    overflow-y: auto;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+  }
+}
+
+@media print {
+  @page {
+    margin: 1cm;
+    size: auto;
+  }
+
+  nav,
+  button,
+  .no-print,
+  [role="tablist"] {
+    display: none !important;
+  }
+
+  body,
+  html,
+  main {
+    background: white !important;
+    color: black !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Force all tabs to show sequentially in print */
+  [role="tabpanel"] {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-top: 2rem !important;
+    padding: 0 !important;
+  }
+
+  /* Remove large gaps and refine layout */
+  .grid {
+    display: block !important;
+  }
+
+  .space-y-10> :not([hidden])~ :not([hidden]),
+  .space-y-8> :not([hidden])~ :not([hidden]) {
+    margin-top: 1.5rem !important;
+  }
+
+  .glass-card {
+    background: white !important;
+    backdrop-filter: none !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    margin-bottom: 1.5rem !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 }
